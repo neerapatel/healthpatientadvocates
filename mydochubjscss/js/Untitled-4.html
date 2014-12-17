@@ -1,0 +1,156 @@
+<script type="text/javascript">
+$(document).ready(function(){
+	
+	$("#services").click(function(){
+		  var fields = $("input[name='services[]']").serializeArray(); 
+		  if (fields.length == 0) 
+			$("#services_verify").css({ "background-image": "url('<?php echo base_url_css;?>images/no.png')" }); 
+		  else 
+			$("#services_verify").css({ "background-image": "url('<?php echo base_url_css;?>images/yes.png')" }); 
+		});
+
+	$("#gender").change(function(){
+		  var fields = $("input[name='gender']").serializeArray(); 
+		  if (fields.length == 0) 
+			$("#gender_verify").css({ "background-image": "url('<?php echo base_url_css;?>images/no.png')" }); 
+		  else 
+			$("#gender_verify").css({ "background-image": "url('<?php echo base_url_css;?>images/yes.png')" }); 
+		});
+
+	$("#age").keyup(function(){
+        
+		var age = $("#age").val();
+        
+		if((age=='') || isNaN(age))
+                $("#age_verify").css({ "background-image": "url('<?php echo base_url_css;?>images/no.png')" }); 
+		else
+                $("#age_verify").css({ "background-image": "url('<?php echo base_url_css;?>images/yes.png')" }); 
+	});
+	
+	$("#problem_desc").keyup(function(){
+        
+		var problem_desc = $("#problem_desc").val();
+        
+		if(problem_desc=='')
+                $("#problem_desc_verify").css({ "background-image": "url('<?php echo base_url_css;?>images/no.png')" }); 
+		else
+                $("#problem_desc_verify").css({ "background-image": "url('<?php echo base_url_css;?>images/yes.png')" }); 
+	});
+
+	$("#advocate_help_desc").keyup(function(){
+        
+		var problem_desc = $("#advocate_help_desc").val();
+        
+		if(problem_desc=='')
+                $("#advocate_help_desc_verify").css({ "background-image": "url('<?php echo base_url_css;?>images/no.png')" }); 
+		else
+                $("#advocate_help_desc_verify").css({ "background-image": "url('<?php echo base_url_css;?>images/yes.png')" }); 
+	});
+
+	$("#timings").keyup(function(){
+        
+		var timings = $("#timings").val();
+        
+		if(timings=='')
+                $("#timings_verify").css({ "background-image": "url('<?php echo base_url_css;?>images/no.png')" }); 
+		else
+                $("#timings_verify").css({ "background-image": "url('<?php echo base_url_css;?>images/yes.png')" }); 
+	});
+	
+	$("#zipcode").keyup(function(){
+        
+		var zipcode = $("#zipcode").val();
+        
+		if(zipcode=='')
+                $("#zipcode_verify").css({ "background-image": "url('<?php echo base_url_css;?>images/no.png')" }); 
+		else
+                $("#zipcode_verify").css({ "background-image": "url('<?php echo base_url_css;?>images/yes.png')" }); 
+	});
+	
+	$("#notification_mode_both").keyup(function(){
+        
+		var notification_mode_verify = $("#notification_mode").val();
+        
+		if(notification_mode_verify =='')
+            $("#notification_mode_verify").css({ "background-image": "url('<?php echo base_url_css;?>images/no.png')" }); 
+		else
+		{
+            $("#notification_mode_verify").css({ "background-image": "url('<?php echo base_url_css;?>images/yes.png')" }); 
+		
+			if(notification_mode_verify == 'email')
+			{
+					// email validation
+					$("#notification_mode_email").keyup(function(){
+						var email = $("#notification_mode_email").val();
+						
+						if(email != 0)
+						{
+							if(isValidEmailAddress(email))
+							   $("#email_verify").css({ "background-image": "url('<?php echo base_url_css;?>images/yes.png')" });
+							else
+							   $("#email_verify").css({ "background-image": "url('<?php echo base_url_css;?>images/no.png')" });
+						}
+						else 
+						{
+							  $("#email_verify").css({ "background-image": "url('<?php echo base_url_css;?>images/no.png')" });
+						}
+				
+					});
+				
+				
+				
+			}
+			else
+			{
+				// email+phone validation
+				
+					$("#notification_mode_email").keyup(function(){
+						var email = $("#notification_mode_email").val();
+						
+						if(email != 0)
+						{
+							if(isValidEmailAddress(email))
+							   $("#email_verify").css({ "background-image": "url('<?php echo base_url_css;?>images/yes.png')" });
+							else
+							   $("#email_verify").css({ "background-image": "url('<?php echo base_url_css;?>images/no.png')" });
+						}
+						else 
+						{
+							  $("#email_verify").css({ "background-image": "url('<?php echo base_url_css;?>images/no.png')" });
+						}
+				
+					});
+						
+				//phone validation
+				
+					$("#notification_mode_phone").keyup(function(){
+        
+							var phone = $("#notification_mode_phone").val();
+							
+							if((phone=='') || isNaN(phone))
+									$("#phone_verify").css({ "background-image": "url('<?php echo base_url_css;?>images/no.png')" }); 
+							else
+									$("#phone_verify").css({ "background-image": "url('<?php echo base_url_css;?>images/yes.png')" }); 
+						});
+
+			}		
+		}
+	});
+	
+	$("#full_name").keyup(function(){
+        
+		var full_name = $("#full_name").val();
+        
+		if(!isAlphabaetical(full_name))
+		{
+                $("#full_name_verify").css({ "background-image": "url('<?php echo base_url_css;?>images/no.png')" }); 
+		}
+		else
+		{
+                $("#full_name_verify").css({ "background-image": "url('<?php echo base_url_css;?>images/yes.png')" }); 
+		}
+	});
+
+
+});
+</script>

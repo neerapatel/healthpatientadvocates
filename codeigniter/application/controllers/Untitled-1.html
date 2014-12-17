@@ -1,0 +1,200 @@
+<script type="text/javascript">
+$(document).ready(function(){
+	
+	$("#services").keyup(function(){
+		var services = $("#services").val();
+        
+		if(services == '')        
+			$("#services_verify").css({ "background-image": "url('<?php echo base_url_css;?>images/no.png')" }); 
+		else
+			$("#services_verify").css({ "background-image": "url('<?php echo base_url_css;?>images/yes.png')" }); 
+	});
+
+
+	$("#email_address").keyup(function(){
+		var email = $("#email_address").val();
+		
+        if(isValidEmailAddress(email))
+        {
+        
+		$.ajax({
+            type: "POST",
+            url: "<?php echo base_url();?>register/check_email",
+            data: "email="+$("#email_address").val(),
+            success: function(msg){
+                if(msg=="true")
+                {
+                    $("#email_verify").css({ "background-image": "url('<?php echo base_url_css;?>images/yes.png')" });
+                }
+                else
+			    {
+                    $("#email_verify").css({ "background-image": "url('<?php echo base_url_css;?>images/no.png')" });
+                }
+            }
+        });
+		 
+		}
+        else 
+		{
+            $("#email_verify").css({ "background-image": "none" });
+        }
+    });
+	
+	$("#email_address").keyup(function(){
+        var email = $("#email_address").val();
+        
+        if(email != 0)
+        {
+         
+            if(isValidEmailAddress(email))
+            {
+               $("#email_verify").css({ "background-image": "url('<?php echo base_url_css;?>images/yes.png')" });
+               email_con=true;
+               //register_show();
+            } else {
+               
+                $("#email_verify").css({ "background-image": "url('<?php echo base_url_css;?>images/no.png')" });
+            }
+ 
+        }
+        else {
+            $("#email_verify").css({ "background-image": "none" });
+        }
+
+    });
+	
+	$("#firstname").keyup(function(){
+        
+		var lname = $("#firstname").val();
+        
+		if(!isAlphabaetical(lname))
+		{
+                $("#firstname_verify").css({ "background-image": "url('<?php echo base_url_css;?>images/no.png')" }); 
+		}
+		else
+		{
+                $("#firstname_verify").css({ "background-image": "url('<?php echo base_url_css;?>images/yes.png')" }); 
+		}
+	});
+	
+	$("#lastname").keyup(function(){
+        
+		var lname = $("#lastname").val();
+        
+		if(!isAlphabaetical(lname))
+		{
+                $("#lastname_verify").css({ "background-image": "url('<?php echo base_url_css;?>images/no.png')" }); 
+		}
+		else
+		{
+                $("#lastname_verify").css({ "background-image": "url('<?php echo base_url_css;?>images/yes.png')" }); 
+		}
+	});
+	
+	$("#password").keyup(function(){
+        
+        if($("#con_password").val().length >= 0)
+        {
+            if($("#con_password").val()!=$("#password").val())
+            {
+                $("#confrimpwd_verify").css({ "background-image": "url('<?php echo base_url_css;?>images/no.png')" }); 
+                $("#password_verify").css({ "background-image": "url('<?php echo base_url_css;?>images/no.png')" });
+                pwd=false;
+                //register_show();
+            }
+            else{
+                $("#confrimpwd_verify").css({ "background-image": "url('<?php echo base_url_css;?>images/yes.png')" }); 
+                $("#password_verify").css({ "background-image": "url('<?php echo base_url_css;?>images/yes.png')" });
+            }
+        }
+    });
+    
+    $("#con_password").keyup(function(){
+        
+        if($("#password").val().length >=0)
+        {
+            if($("#con_password").val()!=$("#password").val())
+            {
+                $("#confrimpwd_verify").css({ "background-image": "url('<?php echo base_url_css;?>images/no.png')" }); 
+                $("#password_verify").css({ "background-image": "url('<?php echo base_url_css;?>images/no.png')" });
+                pwd=false;
+            }
+            else{
+                $("#confrimpwd_verify").css({ "background-image": "url('<?php echo base_url_css;?>images/yes.png')" }); 
+                $("#password_verify").css({ "background-image": "url('<?php echo base_url_css;?>images/yes.png')" });
+
+            }
+        }
+    });
+});
+
+
+function isValidEmailAddress(emailAddress) {
+ 		var pattern = new RegExp(/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i);
+ 		return pattern.test(emailAddress);
+	}
+	
+function isAlphabaetical(str)
+{
+ 	var pattern = new RegExp( /^[a-z]+$/i);
+	return pattern.test(str);
+}	
+
+</script>
+
+	<script type="text/javascript">
+$(document).ready(function(){
+	
+	$("#services").keyup(function(){
+        
+		var services = $("#services").val();
+        
+		if(services =='')
+		{
+                $("#services_verify").css({ "background-image": "url('<?php echo base_url_css;?>images/no.png')" }); 
+		}
+		else
+		{
+                $("#services_verify").css({ "background-image": "url('<?php echo base_url_css;?>images/yes.png')" }); 
+		}
+	});
+	
+	$("#advocate_help_desc").keyup(function(e){
+		
+		var max = 2;
+		var count_advocate_help_desc_act = $("#advocate_help_desc").val();
+
+		count_advocate_help_desc = count_advocate_help_desc_act.replace(/(^\s*)|(\s*$)/gi,"");
+		count_advocate_help_desc = count_advocate_help_desc.replace(/[ ]{2,}/gi," ");
+		count_advocate_help_desc = count_advocate_help_desc.replace(/\n /,"\n");
+		count_advocate_help_desc = count_advocate_help_desc.split(' ').length;
+		
+		
+		
+		if (e.which < 0x20) {
+            // e.which < 0x20, then it's not a printable character
+            // e.which === 0 - Not a character
+            return;     // Do nothing
+        }
+		if(count_advocate_help_desc ==max)
+		{
+			$("#advocate_help_desc_verify").css({ "background-image": "url('<?php echo base_url_css;?>images/no.png')" }); 
+			$("#limit_words_adv").html('<span class="error">Maximum  allowed word count reached.</span>');
+			 e.preventDefault();
+		}
+		if(count_advocate_help_desc >max)
+		{
+			$("#advocate_help_desc_verify").css({ "background-image": "url('<?php echo base_url_css;?>images/no.png')" }); 
+			$("#limit_words_adv").html('<span class="error">Maximum  allowed word count reached.</span>');
+		}
+		else
+		{
+             $("#advocate_help_desc_verify").css({ "background-image": "url('<?php echo base_url_css;?>images/yes.png')" }); 
+		}
+
+	});
+
+});
+
+
+</script>
